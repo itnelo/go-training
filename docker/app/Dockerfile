@@ -4,11 +4,7 @@ FROM golang:${GOLANG_VERSION}
 
 ARG APP_DEPLOYMENT_PATH
 
-#RUN mkdir -p ${APP_DEPLOYMENT_PATH}
-
 WORKDIR ${APP_DEPLOYMENT_PATH}
-
-COPY . .
 
 RUN go get -d -v ./...
 RUN go install -v ./...
