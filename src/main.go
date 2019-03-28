@@ -5,11 +5,14 @@ import (
 )
 
 func main() {
-	fmt.Println("Functions...")
-	functions()
+	//fmt.Println("Functions...")
+	//functions()
 
-	fmt.Println("\nVariables...")
-	variables()
+	//fmt.Println("\nVariables...")
+	//variables()
 
-	//basics/11
+	fmt.Println("\nConstants...")
+	constants()
+
+	//flowcontrol/1
 }
