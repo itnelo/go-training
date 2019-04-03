@@ -14,8 +14,11 @@ func main() {
 	//fmt.Println("\n\nConstants...")
 	//constants()
 
-	fmt.Println("\n\nUnsafe...")
-	lowlevel()
+	//fmt.Println("\n\nUnsafe...")
+	//lowlevel()
+
+	fmt.Println("\n\nBranch prediction...")
+	branchPredictionCompare()
 
 	// fmt.Println("\n\nControl flow...")
 	// controlflow()
