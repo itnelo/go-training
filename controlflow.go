@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/itnelo/stringutil"
 )
 
 func forloop() {
@@ -15,5 +17,12 @@ func forloop() {
 }
 
 func controlflow() {
-	forloop()
+	//forloop()
+
+	var reversedStr string = stringutil.ReverseRange("!oG ,olleH")
+	fmt.Println("ReverseRange: " + reversedStr)
+
+	reversedStr2 := stringutil.ReverseConvert("2 !oG ,olleH")
+	fmt.Println("ReverseConvert: " + reversedStr2)
+
 }

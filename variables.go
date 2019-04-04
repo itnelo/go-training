@@ -11,6 +11,7 @@ var a, b int = 1, 2
 var (
 	isA    bool       = false
 	maxInt int64      = 1<<63 - 1
+	minInt int64      = -1 << 63
 	cpx    complex128 = cmplx.Sqrt(-5 + 12i)
 )
 

@@ -5,6 +5,10 @@ import (
 	"math/rand"
 )
 
+const (
+	CURRENT_PLATFORM_MAX_INT int = int(^uint(0) >> 1)
+)
+
 func initSlice(n int) (slice []int) {
 	rand.Seed(42)
 
@@ -35,8 +39,9 @@ func branchPredictionBitwise(slice []int) (sum int) {
 	sum = 0
 
 	for i := 0; i < cnt; i++ {
-		var t int = (slice[i] - 128) >> 31
-		sum += (^t & slice[i])
+		var v int = slice[i]
+		var t int = (v - 128) >> 31
+		sum += (^t & v)
 	}
 
 	return
@@ -45,6 +50,8 @@ func branchPredictionBitwise(slice []int) (sum int) {
 func branchPredictionCompare() {
 	const sliceLen int = 1 << 22
 	var slice []int = initSlice(sliceLen)
+
+	fmt.Printf("Max int for current platform: %v\n", CURRENT_PLATFORM_MAX_INT)
 
 	fmt.Printf("n: %v, if-else sum: %v\n", sliceLen, branchPredictionIfElse(slice))
 	fmt.Printf("n: %v, bitwise sum: %v\n", sliceLen, branchPredictionBitwise(slice))

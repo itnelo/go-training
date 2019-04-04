@@ -17,9 +17,9 @@ func main() {
 	//fmt.Println("\n\nUnsafe...")
 	//lowlevel()
 
-	fmt.Println("\n\nBranch prediction...")
-	branchPredictionCompare()
+	//fmt.Println("\n\nBranch prediction...")
+	//branchPredictionCompare()
 
-	// fmt.Println("\n\nControl flow...")
-	// controlflow()
+	fmt.Println("\n\nControl flow...")
+	controlflow()
 }
