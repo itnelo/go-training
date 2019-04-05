@@ -1,4 +1,4 @@
-package main
+package basics
 
 import (
 	"fmt"
@@ -22,7 +22,7 @@ func split(sum int) (x, y int) {
 	return
 }
 
-func functions() {
+func Functions() {
 	fmt.Println(add2(add(42, 13), 5))
 
 	a := "Hello"

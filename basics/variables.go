@@ -1,4 +1,4 @@
-package main
+package basics
 
 import (
 	"fmt"
@@ -32,7 +32,7 @@ func typeInference() {
 	fmt.Printf("v is type %T\n", v)
 }
 
-func variables() {
+func Variables() {
 	var i int
 
 	fmt.Println(x, y, z, i)

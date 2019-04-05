@@ -1,4 +1,4 @@
-package main
+package basics
 
 import (
 	"fmt"
@@ -34,7 +34,7 @@ func numericConstantsHighPrecision() {
 	fmt.Println(needFloat(BIG))
 }
 
-func constants() {
+func Constants() {
 	const INLINE_CONST = 1.5 + 0.9i
 
 	fmt.Println(TEST_CNST, TEST_CNST2, INLINE_CONST)

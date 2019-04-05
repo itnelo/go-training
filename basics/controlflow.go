@@ -1,4 +1,4 @@
-package main
+package basics
 
 import (
 	"fmt"
@@ -16,7 +16,7 @@ func forloop() {
 	}
 }
 
-func controlflow() {
+func Controlflow() {
 	//forloop()
 
 	var reversedStr string = stringutil.ReverseRange("!oG ,olleH")

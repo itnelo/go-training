@@ -1,25 +1,12 @@
 package main
 
 import (
-	"fmt"
+	"github.com/itnelo/go-training/advanced"
+	"github.com/itnelo/go-training/basics"
 )
 
 func main() {
-	//fmt.Println("Functions...")
-	//functions()
+	basics.Run()
 
-	//fmt.Println("\n\nVariables...")
-	//variables()
-
-	//fmt.Println("\n\nConstants...")
-	//constants()
-
-	//fmt.Println("\n\nUnsafe...")
-	//lowlevel()
-
-	//fmt.Println("\n\nBranch prediction...")
-	//branchPredictionCompare()
-
-	fmt.Println("\n\nControl flow...")
-	controlflow()
+	advanced.Run()
 }
