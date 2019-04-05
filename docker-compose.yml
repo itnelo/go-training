@@ -3,17 +3,7 @@ version: '2'
 services:
     app:
         build:
-            context: ./docker/app
+            context: .
             args:
                 GOLANG_VERSION: ${GOLANG_VERSION}
                 APP_DEPLOYMENT_PATH: ${APP_DEPLOYMENT_PATH}
-        volumes:
-            - app_data:${APP_DEPLOYMENT_PATH}
-
-volumes:
-    app_data:
-        driver: local
-        driver_opts:
-            type: none
-            device: ${PWD}
-            o: bind
