@@ -1,2 +1,4 @@
+vendor/*
+!vendor/.gitkeep
 build/*
 !build/.gitkeep
