@@ -1,38 +1,69 @@
 package main
 
 import (
-	"fmt"
 	"testing"
+	"unsafe"
+)
+
+var (
+	ELEMENTS_NUM int = 1 << 20                    // 2^20 == 1048576 elements (int64 type)
+	ELEMENT_SIZE int = int(unsafe.Sizeof(int(1))) // one int represented by, e.g. 8 bytes
 )
 
 // 396 ns/op
 func BenchmarkBranchPrediction(b *testing.B) {
-	slice := initSlice(b.N)
+	slice := initSlice(ELEMENTS_NUM)
+	b.SetBytes(int64(len(slice) * ELEMENT_SIZE))
+
 	b.ResetTimer() // resetting bench timer to exclude slice allocation time
 
-	var sum int
-	for i := 1; i < 100; i++ {
-		sum = branchPredictionIfElse(slice)
+	for i := 1; i < b.N; i++ {
+		branchPredictionIfElse(slice)
 	}
-
-	fmt.Printf("\nn == %v, sum == %v", b.N, sum)
 }
 
 // optimized loop, without if-else control flow (replaced by bitwise ops)
 // 77.5 ns/op
 // approximate x5 times faster than if-else control flow
 func BenchmarkBranchPredictionBitwise(b *testing.B) {
-	slice := initSlice(b.N)
+	slice := initSlice(ELEMENTS_NUM)
+	b.SetBytes(int64(len(slice) * ELEMENT_SIZE))
+
 	b.ResetTimer()
 
-	var sum int
-	for i := 1; i < 100; i++ {
-		sum = branchPredictionBitwise(slice)
+	for i := 1; i < b.N; i++ {
+		branchPredictionBitwise(slice)
 	}
-
-	fmt.Printf("\nn == %v, sum == %v", b.N, sum)
 }
 
+// -cpu 4
+func BenchmarkParallelBranchPredictionIfElse(b *testing.B) {
+	slice := initSlice(ELEMENTS_NUM)
+	b.SetBytes(int64(len(slice) * ELEMENT_SIZE))
+
+	b.ResetTimer()
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			branchPredictionIfElse(slice)
+		}
+	})
+}
+
+func BenchmarkParallelBranchPredictionBitwise(b *testing.B) {
+	slice := initSlice(ELEMENTS_NUM)
+	b.SetBytes(int64(len(slice) * ELEMENT_SIZE))
+
+	b.ResetTimer()
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			branchPredictionBitwise(slice)
+		}
+	})
+}
+
+// (OLD! but valid.)
 // $ go test -bench BranchPrediction
 
 // n == 1, sum == 0goos: linux

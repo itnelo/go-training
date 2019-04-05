@@ -1,4 +1,3 @@
-// array_traverse
 package main
 
 import (
