@@ -29,3 +29,13 @@ func BenchmarkSquareRootBaseEstimatingFormula(b *testing.B) {
 		}
 	})
 }
+
+func BenchmarkSquareRootBaseEstimatingBuiltin(b *testing.B) {
+	b.SetBytes(FLOAT_SIZE)
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			squareRootBaseEstimatingBuiltin(FLOAT_NUMBER)
+		}
+	})
+}

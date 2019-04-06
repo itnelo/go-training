@@ -1,7 +1,9 @@
 package exercises
 
 import (
+	"fmt"
 	"math"
+	"unsafe"
 )
 
 const (
@@ -31,4 +33,17 @@ func squareRootBaseEstimatingFormula(x float64) float64 {
 	}
 
 	return estimate
+}
+
+func squareRootBaseEstimatingBuiltin(x float64) float64 {
+	return math.Sqrt(x)
+}
+
+func evalSquareRootBaseFunctions() {
+	var testVal float64 = 1 << 20
+
+	fmt.Printf("testVal: %v bytes, %v\n", unsafe.Sizeof(testVal), testVal)
+
+	fmt.Printf("\nSquare root base prediction... %v\n", squareRootBaseEstimating(testVal))
+	fmt.Printf("\nSquare root base prediction by formula... %v\n", squareRootBaseEstimatingFormula(testVal))
 }

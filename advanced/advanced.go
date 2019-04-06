@@ -9,5 +9,5 @@ func Run() {
 	//lowlevel()
 
 	fmt.Println("\n\nBranch prediction...")
-	branchPredictionCompare()
+	//branchPredictionCompare()
 }

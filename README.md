@@ -14,6 +14,16 @@ $ go get -d
 $ go mod vendor
 ```
 
+### Updating
+
+```
+# removing unused dependencies and adding missed
+$ go mod tidy
+
+# downloading latest versions, without building and installing
+$ go get -u -d
+```
+
 ### Building
 
 ```

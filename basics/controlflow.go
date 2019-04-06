@@ -3,6 +3,8 @@ package basics
 import (
 	"fmt"
 	"math"
+	"runtime"
+	"time"
 
 	"github.com/itnelo/stringutil"
 )
@@ -35,6 +37,51 @@ func infinityLoop() {
 	}
 }
 
+func today_(t time.Weekday, offset int) time.Weekday {
+	return t + time.Weekday(offset)
+}
+
+func dynamicSwitchExpression() bool {
+	return true
+}
+
+func switching() {
+	fmt.Print("Go runs on ")
+
+	switch os := runtime.GOOS; os {
+	case "darwin":
+		fmt.Println("OS X")
+	case "linux":
+		fmt.Println("Linux")
+	default:
+		fmt.Printf("%s\n", os)
+	}
+
+	fmt.Print("When's Saturday? ")
+
+	var today time.Weekday = time.Now().Weekday()
+
+	switch time.Saturday {
+	case today_(today, 0):
+		fmt.Println("Today")
+	case today_(today, 1):
+		fmt.Println("Tomorrow")
+	case today_(today, 2):
+		fmt.Println("In two days")
+	default:
+		fmt.Println("Too far away")
+	}
+
+	t := time.Now()
+
+	switch dynamicSwitchExpression() {
+	case t.Hour() > 12:
+		fmt.Println("t.Hour() > 12")
+	default:
+		fmt.Println("t.Hour() <= 12")
+	}
+}
+
 func ifScopeStatement(x, n, limit float64) float64 {
 	if v := math.Pow(x, n); v < limit {
 		return v
@@ -59,4 +106,8 @@ func Controlflow() {
 
 	reversedStr2 := stringutil.ReverseConvert("2 !oG ,olleH")
 	fmt.Println("ReverseConvert: " + reversedStr2)
+
+	fmt.Println("ReverseDeferred: " + stringutil.ReverseDeferred("2 !oG ,olleH"))
+
+	switching()
 }
