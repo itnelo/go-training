@@ -60,7 +60,7 @@ func memoryTraverse() {
 func absManual() {
 	var x float64 = -67
 	var x_uint uint64 = *(*uint64)(unsafe.Pointer(&x))
-	x_uint = x_uint & ^(1 << 63)
+	x_uint = x_uint &^ (1 << 63)
 	var y float64 = *(*float64)(unsafe.Pointer(&x_uint))
 	fmt.Printf("binary: %5.2f\n", y)
 }

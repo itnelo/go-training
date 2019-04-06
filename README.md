@@ -1,7 +1,7 @@
 
 # Just a playground for training my Golang skills
 
-### Vendor
+### Vendoring
 
 ```
 # verifying dependencies

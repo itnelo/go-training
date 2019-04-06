@@ -5,7 +5,8 @@ import (
 )
 
 const (
-	FACTOR float64 = 2
+	FACTOR   float64 = 2
+	ACCURACY float64 = 1 / 1000000
 )
 
 func squareRootBaseEstimating(x float64) float64 {
@@ -25,7 +26,7 @@ func squareRootBaseEstimating(x float64) float64 {
 func squareRootBaseEstimatingFormula(x float64) float64 {
 	var estimate float64 = 1.0
 
-	for math.Abs(x-estimate*estimate) > 0.1 {
+	for math.Abs(x-estimate*estimate) > ACCURACY {
 		estimate -= (estimate*estimate - x) / (estimate * 2)
 	}
 
