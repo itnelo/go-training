@@ -39,7 +39,7 @@ func ifScopeStatement(x, n, limit float64) float64 {
 	if v := math.Pow(x, n); v < limit {
 		return v
 	} else {
-		fmt.Printf("%v > %v, so we use limit as a retval\n", v, limit)
+		fmt.Printf("%v > %v, so we use the limit as a retval\n", v, limit)
 	}
 
 	// v is undefined here

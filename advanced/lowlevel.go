@@ -43,6 +43,28 @@ func structAlignments() {
 	fmt.Println("\nunsafe.Offsetof(User.s) == " + fmt.Sprint(unsafe.Offsetof(User.s)))
 }
 
+func memoryTraverse() {
+	vals := []int{10, 20, 30, 40}
+	start := unsafe.Pointer(&vals[0])
+	size := unsafe.Sizeof(int(0))
+
+	fmt.Printf("unsafe.Sizeof(int(0)) == %v\n", size)
+
+	for i := 0; i < len(vals); i++ {
+		var ptr unsafe.Pointer = unsafe.Pointer(uintptr(start) + size*uintptr(i))
+		var item int = *(*int)(ptr)
+		fmt.Printf("%d: %v\n", ptr, item)
+	}
+}
+
+func absManual() {
+	var x float64 = -67
+	var x_uint uint64 = *(*uint64)(unsafe.Pointer(&x))
+	x_uint = x_uint & ^(1 << 63)
+	var y float64 = *(*float64)(unsafe.Pointer(&x_uint))
+	fmt.Printf("binary: %5.2f\n", y)
+}
+
 func lowlevel() {
 	var x uint8 = 24
 
@@ -81,4 +103,8 @@ func lowlevel() {
 	fmt.Printf("\nunsafe.Pointer carries no type information, so value has been truncated: %v", *b)
 
 	structAlignments()
+
+	memoryTraverse()
+
+	absManual()
 }

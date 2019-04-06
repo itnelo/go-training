@@ -32,13 +32,16 @@ go install -mod vendor
 ### Testing
 
 ```
-# launch all benchmarks, with memory info
-$ go test -bench . -benchmem
+# launch all tests in package and sub-packages
+$ go test ./...
 
-# or a specific func name pattern
-$ go test -bench BranchPrediction -benchmem
+# launch all benchmarks in package and sub-packages
+$ go test ./... -bench .
 
-# $ go test -bench BranchPrediction -benchmem
+# by specific func name pattern, with memory info
+$ go test ./... -bench BranchPrediction -benchmem
+
+# $ go test ./... -bench . -benchmem
 # goos: linux
 # goarch: amd64
 # pkg: github.com/itnelo/go-training
@@ -51,5 +54,5 @@ $ go test -bench BranchPrediction -benchmem
 # ok  	github.com/itnelo/go-training	6.889s
 
 # restrict parallel benchmarks to 2 processes, short mode
-$ go test -bench BranchPrediction -benchmem -cpu 2 -short
+$ go test ./... -bench BranchPrediction -benchmem -cpu 2 -short
 ```
