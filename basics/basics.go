@@ -5,8 +5,8 @@ import (
 )
 
 func Run() {
-	fmt.Println("Functions...")
-	Functions()
+	//fmt.Println("Functions...")
+	//Functions()
 
 	//fmt.Println("\n\nVariables...")
 	//Variables()
@@ -14,7 +14,7 @@ func Run() {
 	//fmt.Println("\n\nConstants...")
 	//Constants()
 
-	fmt.Println("\n\nControl flow...")
+	//fmt.Println("\n\nControl flow...")
 	//Controlflow()
 
 	fmt.Println("\n\nControl flow: defer...")
