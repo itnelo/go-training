@@ -1,11 +1,12 @@
 package basics
 
 import (
+	"errors"
 	"fmt"
 )
 
 // 1. For clean-up tasks (mutex unlocks, closing connections/resources, etc.)
-// 2. Recovering from panic
+// 2. Recovering from panic (always return error by convention, though)
 // 3. Managing error codes, etc.
 
 func printDeferred() {
@@ -34,7 +35,10 @@ func oofPanic(i int) {
 	if i > 3 {
 		fmt.Println("Panicking!")
 
-		panic(fmt.Sprintf("Panic at %v iteration.", i))
+		// way 1: errors.New
+		// way 2: fmt.Errorf
+		// way 3: custom struct that implements error interface
+		panic(fmt.Errorf("Panic at %v iteration.", i))
 	}
 
 	defer fmt.Printf("Defer in oofPanic, %v iteration\n", i)
@@ -43,13 +47,13 @@ func oofPanic(i int) {
 	oofPanic(i + 1)
 }
 
-func deferPanicRecovering() (error string) {
+func deferPanicRecovering() (err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Println("Panic captured:", r)
 
-			if rStr, isString := r.(string); isString {
-				error = "An error has been occurred during function call: " + rStr
+			if nestedError, isError := r.(error); isError {
+				err = errors.New("An error has been occurred during function call: " + nestedError.Error())
 			} else {
 				// Process unrecoverable situation.
 				fmt.Println("Unrecoverable situation.")
@@ -73,9 +77,9 @@ func Deferred() {
 	deferredCounting()
 
 	//deferExecutedAfterPanic()
-	var error string = deferPanicRecovering()
+	err := deferPanicRecovering()
 
-	fmt.Printf("Error content from deferPanicRecovering() func: %v\n", error)
+	fmt.Printf("Error content from deferPanicRecovering() func: %v\n", err)
 
 	//Calling function that can panic.
 	//Printing in oofPanic, 0 iteration
