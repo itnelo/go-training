@@ -17,6 +17,9 @@ func Run() {
 	//fmt.Println("\n\nControl flow...")
 	//Controlflow()
 
-	fmt.Println("\n\nControl flow: defer...")
-	Deferred()
+	//fmt.Println("\n\nControl flow: defer...")
+	//Deferred()
+
+	fmt.Println("\n\nStructures...")
+	Structures()
 }
