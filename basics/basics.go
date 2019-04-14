@@ -20,6 +20,12 @@ func Run() {
 	//fmt.Println("\n\nControl flow: defer...")
 	//Deferred()
 
-	fmt.Println("\n\nStructures...")
-	Structures()
+	//fmt.Println("\n\nStructures...")
+	//Structures()
+
+	fmt.Println("\n\nBlank identifier...")
+	blankIdentifier()
+
+	fmt.Println("\n\nSlices...")
+	slices()
 }
