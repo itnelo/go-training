@@ -105,9 +105,32 @@ func slices() {
 	var d []int = make([]int, 2, 7)
 	fmt.Println("Dynamically sized array:", d)
 
-	// todo: slice copy
-	// todo: delete slice elem
-	// todo: slice comparison
 	// https://medium.com/rungo/the-anatomy-of-slices-in-go-6450e3bb2b94
 	// https://github.com/golang/go/wiki/SliceTricks
+	// slice copy
+	dst := make([]int, 3)
+	var howMuchCopied int = copy(dst, b[1:4])
+	dst[0] = 1000
+	fmt.Printf(
+		"Copied %v elements from b(%v, len: %v, cap: %v)[%p] to dst(%v, len: %v, cap: %v)[%p]\n",
+		howMuchCopied,
+		b, len(b), cap(b), &b,
+		dst, len(dst), cap(dst), &dst)
+
+	// delete slice elem
+	dst = append(dst[:1], dst[2:]...)
+	fmt.Println("Deleted element at index 1:", dst)
+
+	dst2 := []int{1, 2, 3, 4, 5, 6, 7}
+	// dst2[2:] == 4, 5, 6, 7
+	// dst2[3:] == 5, 6, 7
+	// copy -> 5, 6, 7, 7
+	// copy[:3+3] -> 1, 2, 3, 5, 6, 7
+	dst2 = dst2[:3+copy(dst2[3:], dst2[4:])]
+	//dst2[len(dst2)-1] = nil // to eliminate leak (pointer/struct with underlying pointer)
+	fmt.Println("Deleted element at index 3:", dst2)
+
+	// slice comparison
+	// with nil only
+	// compare by range and O(n) loop for each element
 }
