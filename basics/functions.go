@@ -22,6 +22,10 @@ func split(sum int) (x, y int) {
 	return
 }
 
+func functionAsVariable(closureToEvaluate func(int, int) int) int {
+	return closureToEvaluate(3, 4)
+}
+
 func Functions() {
 	fmt.Println(add2(add(42, 13), 5))
 
@@ -33,4 +37,16 @@ func Functions() {
 	fmt.Println(a, b, "swapped")
 
 	fmt.Println(split(100))
+
+	deferredClosure := func() {
+		calcSum := func(x, y int) int {
+			return x + y
+		}
+
+		result := functionAsVariable(calcSum)
+
+		fmt.Println("functionAsVariable(calcSum) == ", result)
+	}
+
+	defer deferredClosure()
 }

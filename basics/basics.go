@@ -1,12 +1,12 @@
 package basics
 
 import (
-	_ "fmt"
+	"fmt"
 )
 
 func Run() {
-	//fmt.Println("Functions...")
-	//Functions()
+	fmt.Println("Functions...")
+	Functions()
 
 	//fmt.Println("\n\nVariables...")
 	//Variables()
