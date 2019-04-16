@@ -1,13 +1,13 @@
 package advanced
 
 import (
-	"fmt"
+	_ "fmt"
 )
 
 func Run() {
 	//fmt.Println("\n\nUnsafe...")
 	//lowlevel()
 
-	fmt.Println("\n\nBranch prediction...")
+	//fmt.Println("\n\nBranch prediction...")
 	//branchPredictionCompare()
 }
