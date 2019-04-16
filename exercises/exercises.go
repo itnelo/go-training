@@ -4,4 +4,5 @@ func Run() {
 	//evalSquareRootBaseFunctions()
 	//showPic()
 	//wordCount()
+	fibonacciClosure()
 }

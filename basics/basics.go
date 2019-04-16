@@ -1,7 +1,7 @@
 package basics
 
 import (
-	"fmt"
+	_ "fmt"
 )
 
 func Run() {
@@ -32,6 +32,6 @@ func Run() {
 	//fmt.Println("\n\nMaps...")
 	//maps()
 
-	fmt.Println("\n\nClosures...")
-	closures()
+	//fmt.Println("\n\nClosures...")
+	//closures()
 }
