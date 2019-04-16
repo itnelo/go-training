@@ -22,8 +22,8 @@ func split(sum int) (x, y int) {
 	return
 }
 
-func functionAsVariable(closureToEvaluate func(int, int) int) int {
-	return closureToEvaluate(3, 4)
+func functionAsVariable(funcToEvaluate func(int, int) int) int {
+	return funcToEvaluate(3, 4)
 }
 
 func Functions() {

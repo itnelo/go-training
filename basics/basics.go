@@ -5,8 +5,8 @@ import (
 )
 
 func Run() {
-	fmt.Println("Functions...")
-	Functions()
+	//fmt.Println("Functions...")
+	//Functions()
 
 	//fmt.Println("\n\nVariables...")
 	//Variables()
@@ -31,4 +31,7 @@ func Run() {
 
 	//fmt.Println("\n\nMaps...")
 	//maps()
+
+	fmt.Println("\n\nClosures...")
+	closures()
 }
