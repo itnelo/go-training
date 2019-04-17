@@ -35,8 +35,8 @@ func Run() {
 	//fmt.Println("\n\nClosures...")
 	//closures()
 
-	fmt.Println("\n\nIota enumerations...")
-	iotaEnumerations()
+	//fmt.Println("\n\nIota enumerations...")
+	//iotaEnumerations()
 
 	fmt.Println("\n\nInterfaces and methods...")
 	interfacesAndMethods()

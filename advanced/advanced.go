@@ -1,7 +1,7 @@
 package advanced
 
 import (
-	"fmt"
+	_ "fmt"
 )
 
 func Run() {
@@ -11,6 +11,6 @@ func Run() {
 	//fmt.Println("\n\nBranch prediction...")
 	//branchPredictionCompare()
 
-	fmt.Println("\n\nSymbol relocation...")
-	symbolRelocation()
+	//fmt.Println("\n\nSymbol relocation...")
+	//symbolRelocation()
 }
