@@ -40,4 +40,7 @@ func Run() {
 
 	fmt.Println("\n\nInterfaces and methods...")
 	interfacesAndMethods()
+
+	fmt.Println("\n\nUnicode identifiers...")
+	светКамераМотор()
 }
