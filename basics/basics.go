@@ -1,7 +1,7 @@
 package basics
 
 import (
-	_ "fmt"
+	"fmt"
 )
 
 func Run() {
@@ -34,4 +34,10 @@ func Run() {
 
 	//fmt.Println("\n\nClosures...")
 	//closures()
+
+	fmt.Println("\n\nIota enumerations...")
+	iotaEnumerations()
+
+	fmt.Println("\n\nInterfaces and methods...")
+	interfacesAndMethods()
 }

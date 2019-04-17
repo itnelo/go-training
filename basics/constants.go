@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+// update: Naming convention for constants is TestCnst, not TEST_CNST!
+
 const (
 	TEST_CNST      int    = 7
 	TEST_CNST2     string = "test1"
