@@ -5,5 +5,5 @@ func Run() {
 	//showPic()
 	//wordCount()
 	//fibonacciClosure()
-	светКамераМотор()
+	//светКамераМотор()
 }

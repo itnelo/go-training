@@ -9,7 +9,7 @@ type Doggo struct {
 
 // non-struct types can also have a methods (see iota_enum.go)
 
-// convention: either all pointer receivers or all value receiver, but not both
+// convention: either all pointer receivers or all value receivers, but not both
 
 // just a function with receiver arg
 // receiver should be available within package
@@ -34,7 +34,7 @@ func (d *Doggo) EatChappie() {
 	d.isHungry = false
 }
 
-func interfacesAndMethods() {
+func structMethods() {
 	var bill Doggo = Doggo{}
 
 	bill.name = "Bill"
