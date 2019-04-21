@@ -52,9 +52,9 @@ func structMethods() {
 	// accept both copy and pointer
 	var samPtr *Doggo = &Doggo{"sam", true}
 	samPtr.Woof()
-	samPtr.EatBadFood()
+	samPtr.EatBadFood() // access with value copy receiver
 	samPtr.Woof()
-	samPtr.EatChappie()
+	samPtr.EatChappie() // access with pointer receiver
 	samPtr.Woof()
 
 	// also work in reverse direction (indirection)

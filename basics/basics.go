@@ -43,4 +43,7 @@ func Run() {
 
 	fmt.Println("\n\nInterfaces...")
 	interfaces()
+
+	fmt.Println("\n\nEmbedding...")
+	embedding()
 }
