@@ -1,7 +1,7 @@
 package basics
 
 import (
-	"fmt"
+	_ "fmt"
 )
 
 func Run() {
@@ -14,8 +14,8 @@ func Run() {
 	//fmt.Println("\n\nConstants...")
 	//Constants()
 
-	fmt.Println("\n\nControl flow...")
-	Controlflow()
+	//fmt.Println("\n\nControl flow...")
+	//Controlflow()
 
 	//fmt.Println("\n\nControl flow: defer...")
 	//Deferred()

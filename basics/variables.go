@@ -32,6 +32,26 @@ func typeInference() {
 	fmt.Printf("v is type %T\n", v)
 }
 
+func strings() {
+	// string is a character (byte aka uint8) sequence
+	var str string = "пYривет"
+	// [0:2] == "п" (read 2 byte rune / int32)
+	// [2:3] == "Y" (read 1 byte ASCII)
+	// [3:5] == "р" (read 2 byte rune / int32)
+	// etc.
+
+	// index access should be by slice in case of UTF-8
+	fmt.Printf("%s\n", str[3:5])
+
+	// best practices:
+	// range yields (index, tune) from string
+	// []rune("привет")
+	// []int32("привет")
+	// []byte("test") - ASCII
+	// []uint8("test") - ASCII
+	// string(byte[]("..."))
+}
+
 func Variables() {
 	var i int
 
@@ -58,4 +78,6 @@ func Variables() {
 	typeConversions()
 
 	typeInference()
+
+	strings()
 }

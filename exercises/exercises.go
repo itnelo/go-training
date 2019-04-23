@@ -6,4 +6,5 @@ func Run() {
 	//wordCount()
 	//fibonacciClosure()
 	//светКамераМотор()
+	ipaddrStringer()
 }
