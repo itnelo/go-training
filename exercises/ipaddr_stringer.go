@@ -9,13 +9,15 @@ import (
 type IPAddr [4]byte
 
 func (a IPAddr) String() string {
-	var strs []string
+	var ipAddrStrParts []string
 
 	for _, b := range a {
-		strs = append(strs, strconv.Itoa(int(b)))
+		numberStr := strconv.Itoa(int(b))
+
+		ipAddrStrParts = append(ipAddrStrParts, numberStr)
 	}
 
-	return strings.Join(strs, ".")
+	return strings.Join(ipAddrStrParts, ".")
 }
 
 func ipaddrStringer() {
