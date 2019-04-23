@@ -14,8 +14,8 @@ func Run() {
 	//fmt.Println("\n\nConstants...")
 	//Constants()
 
-	//fmt.Println("\n\nControl flow...")
-	//Controlflow()
+	fmt.Println("\n\nControl flow...")
+	Controlflow()
 
 	//fmt.Println("\n\nControl flow: defer...")
 	//Deferred()
@@ -41,9 +41,9 @@ func Run() {
 	//fmt.Println("\n\nStruct methods...")
 	//structMethods()
 
-	fmt.Println("\n\nInterfaces...")
-	interfaces()
+	//fmt.Println("\n\nInterfaces...")
+	//interfaces()
 
-	fmt.Println("\n\nEmbedding...")
-	embedding()
+	//fmt.Println("\n\nEmbedding...")
+	//embedding()
 }

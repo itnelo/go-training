@@ -95,6 +95,18 @@ func ifScopeStatement(x, n, limit float64) float64 {
 	return limit
 }
 
+func typeSwitch(i interface{}) {
+	switch v := i.(type) {
+	case int:
+		fmt.Println("an integer")
+	case string:
+		fmt.Println("a string")
+	// v is the same type as i
+	default:
+		fmt.Printf("(%v, %T)\n", v, v)
+	}
+}
+
 func Controlflow() {
 	//forloop()
 	forInvariantOnly()
@@ -110,4 +122,5 @@ func Controlflow() {
 	fmt.Println("ReverseDeferred: " + stringutil.ReverseDeferred("2 !oG ,olleH"))
 
 	switching()
+	typeSwitch(5.55)
 }
