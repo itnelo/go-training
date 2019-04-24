@@ -29,14 +29,14 @@ type rot13Reader struct {
 	r io.Reader
 }
 
-func rot13(b byte) byte {
-	var low, high byte
+func rot13(char byte) byte {
+	var rangeLowBound, rangeHighBound byte
 
 	switch {
-	case 'a' <= b && b <= 'z':
-		low, high = 'a', 'z'
-	case 'A' <= b && b <= 'Z':
-		low, high = 'A', 'Z'
+	case 'a' <= char && char <= 'z':
+		rangeLowBound, rangeHighBound = 'a', 'z'
+	case 'A' <= char && char <= 'Z':
+		rangeLowBound, rangeHighBound = 'A', 'Z'
 	default:
 		return b
 	}
@@ -47,7 +47,7 @@ func rot13(b byte) byte {
 	// 12 % 10 == 2 - can be treated as "we broke upper bound and starting again from zero"
 	// if our low bound starts with >0 value, we need to adjust it temporarily
 	// to 0 while calculation and apply it right after
-	return (b-low+13)%(high-low+1) + low
+	return (b-rangeLowBound+13)%(rangeHighBound-rangeLowBound+1) + rangeLowBound
 }
 
 func (r *rot13Reader) Read(outputBuffer []byte) (bytesRead int, err error) {
