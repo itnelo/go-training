@@ -4,7 +4,25 @@ import (
 	"fmt"
 	"io"
 	"strings"
+
+	"golang.org/x/tour/reader"
 )
+
+type MyReader struct{}
+
+func (r MyReader) Read(buf []byte) (int, error) {
+	if cap(buf) < 1 {
+		return 0, io.ErrShortBuffer
+	}
+
+	buf[0] = 'A'
+
+	return 1, nil
+}
+
+func myReader() {
+	reader.Validate(MyReader{})
+}
 
 func streamReader() {
 	var data string = "This is data to read."
@@ -27,4 +45,6 @@ func streamReader() {
 			break
 		}
 	}
+
+	myReader()
 }
