@@ -3,6 +3,7 @@ package exercises
 import (
 	"fmt"
 	"io"
+	"os"
 	"strings"
 
 	"golang.org/x/tour/reader"
@@ -20,8 +21,49 @@ func (r MyReader) Read(buf []byte) (int, error) {
 	return 1, nil
 }
 
-func myReader() {
+func myReaderTest() {
 	reader.Validate(MyReader{})
+}
+
+type rot13Reader struct {
+	r io.Reader
+}
+
+func rot13(b byte) byte {
+	var low, high byte
+
+	switch {
+	case 'a' <= b && b <= 'z':
+		low, high = 'a', 'z'
+	case 'A' <= b && b <= 'Z':
+		low, high = 'A', 'Z'
+	default:
+		return b
+	}
+
+	// x % y (modular) can be used as abstract solution
+	// it determines how x is fits in [0, y] cyclic range
+	// for example, 5 % 10 == 5, 5 is exists in range
+	// 12 % 10 == 2 - can be treated as "we broke upper bound and starting again from zero"
+	// if our low bound starts with >0 value, we need to adjust it temporarily
+	// to 0 while calculation and apply it right after
+	return (b-low+13)%(high-low+1) + low
+}
+
+func (r *rot13Reader) Read(outputBuffer []byte) (bytesRead int, err error) {
+	bytesRead, err = r.r.Read(outputBuffer)
+
+	for i := 0; i < bytesRead; i++ {
+		outputBuffer[i] = rot13(outputBuffer[i])
+	}
+
+	return
+}
+
+func rot13ReaderTest() {
+	s := strings.NewReader("Lbh penpxrq gur pbqr!")
+	r := rot13Reader{s}
+	io.Copy(os.Stdout, &r)
 }
 
 func streamReader() {
@@ -46,5 +88,6 @@ func streamReader() {
 		}
 	}
 
-	myReader()
+	myReaderTest()
+	rot13ReaderTest()
 }
