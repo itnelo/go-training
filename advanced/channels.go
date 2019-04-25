@@ -12,7 +12,11 @@ import (
 
 // <- channel operator for receiving data
 
-// conventions: communicate less, do more
+// conventions:
+// - communicate less, do more
+// - only sender closes the channel
+// - closing a channel is optionally, only if an explicit "no more values" flag is needed
+
 // messaging between goroutines is pricey, especially if they executed by
 // different OS threads
 
@@ -40,6 +44,8 @@ func calculateSum(context *Context, c chan int) {
 		sum += value
 	}
 
+	// Blocks execution of goroutine if channel is full
+	// (until some receiver will read it)
 	c <- sum
 }
 
@@ -82,7 +88,13 @@ func channels() {
 	var sum int = 0
 
 	for i := 0; i < cpuCount; i++ {
-		var partialSum = <-resultsChannel
+		// Blocks execution of main goroutine if channel is empty
+		// (value, ok), where ok indicates that channel is not closed yet
+		partialSum, isMoreValues := <-resultsChannel
+
+		if !isMoreValues {
+			break
+		}
 
 		fmt.Println("Partial sum received:", partialSum)
 
@@ -90,7 +102,7 @@ func channels() {
 	}
 
 	// Using range to continuously fetch response from the channel.
-	// Note: we need to close() somewhere before or within worker context
+	// Note: we need to close() within worker (sender) context
 	// to properly stop this loop.
 	//
 	// for partialSum := range resultsChannel {
