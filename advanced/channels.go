@@ -10,10 +10,11 @@ import (
 // sync goroutines without any locks or condition variables
 // By default <- blocks until sender becomes ready
 
-// <- channel operator for sync
+// <- channel operator for receiving data
 
 // conventions: communicate less, do more
-// messaging between goroutines is pricey
+// messaging between goroutines is pricey, especially if they executed by
+// different OS threads
 
 const (
 	DataAmount int = 1 << 15
@@ -43,14 +44,19 @@ func calculateSum(context *Context, c chan int) {
 }
 
 func channels() {
-	var data = make([]int, DataAmount)
+	var data []int = make([]int, DataAmount)
 
 	for i := 0; i < DataAmount; i++ {
 		data[i] = 1
 	}
 
+	// runtime.GOMAXPROCS is responsible for parallelism
+	// 1 means it is only concurrent execution
+	fmt.Println("runtime.GOMAXPROCS ==", runtime.GOMAXPROCS(0))
+	//runtime.GOMAXPROCS(1)
+
 	var cpuCount int = runtime.NumCPU()
-	var dataBytes = int(unsafe.Sizeof(cpuCount)) * DataAmount
+	var dataBytes int = int(unsafe.Sizeof(cpuCount)) * DataAmount
 
 	fmt.Printf("Processing %d bytes of data using %d CPU\n", dataBytes, cpuCount)
 
@@ -59,8 +65,13 @@ func channels() {
 	// unbuffered channel
 	// var results = make(chan int)
 
-	// channel with buffer capacity
-	var resultsChannel = make(chan int, cpuCount)
+	// Channel with buffer capacity
+	// Means we can write N integers in this channel before it blocks
+	// If the writes on channel are more than its capacity,
+	// then the writes are not processed till its concurrent reading is done
+	// from one of the goroutines, and once that is done,
+	// it will write new values to the channel.
+	var resultsChannel chan int = make(chan int, cpuCount)
 
 	for i := 0; i < cpuCount; i++ {
 		var lowerBound, upperBound int = i * batchSize, (i + 1) * batchSize
@@ -68,7 +79,7 @@ func channels() {
 		go calculateSum(&Context{data, lowerBound, upperBound}, resultsChannel)
 	}
 
-	var sum int
+	var sum int = 0
 
 	for i := 0; i < cpuCount; i++ {
 		var partialSum = <-resultsChannel
@@ -90,3 +101,23 @@ func channels() {
 
 	fmt.Println("Sum:", sum)
 }
+
+// runtime.GOMAXPROCS == 8
+// Processing 262144 bytes of data using 8 CPU
+// Starting calculation for data[28672:32768]
+// Partial sum received: 4096
+// Starting calculation for data[0:4096]
+// Partial sum received: 4096
+// Starting calculation for data[24576:28672]
+// Partial sum received: 4096
+// Starting calculation for data[4096:8192]
+// Starting calculation for data[8192:12288]
+// Starting calculation for data[12288:16384]
+// Starting calculation for data[20480:24576]
+// Partial sum received: 4096
+// Partial sum received: 4096
+// Partial sum received: 4096
+// Partial sum received: 4096
+// Starting calculation for data[16384:20480]
+// Partial sum received: 4096
+// Sum: 32768
