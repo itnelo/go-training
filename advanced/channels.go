@@ -19,12 +19,23 @@ const (
 	DataAmount int = 1 << 15
 )
 
-func calculate(data []int, c chan int) {
-	fmt.Println("Starting calculation for data banch", len(data))
+type Context struct {
+	data       []int
+	lowerBound int
+	upperBound int
+}
+
+func calculateSum(context *Context, c chan int) {
+	fmt.Printf(
+		"Starting calculation for data[%d:%d]\n",
+		context.lowerBound,
+		context.upperBound,
+	)
 
 	var sum int = 0
+	var partialData = context.data[context.lowerBound:context.upperBound]
 
-	for _, value := range data {
+	for _, value := range partialData {
 		sum += value
 	}
 
@@ -44,24 +55,38 @@ func channels() {
 	fmt.Printf("Processing %d bytes of data using %d CPU\n", dataBytes, cpuCount)
 
 	var batchSize int = DataAmount / cpuCount
-	var partialSum = make(chan int)
+
+	// unbuffered channel
+	// var results = make(chan int)
+
+	// channel with buffer capacity
+	var resultsChannel = make(chan int, cpuCount)
 
 	for i := 0; i < cpuCount; i++ {
-		var lowBound, highBound int = i * batchSize, (i + 1) * batchSize
-		go calculate(data[lowBound:highBound], partialSum)
+		var lowerBound, upperBound int = i * batchSize, (i + 1) * batchSize
+
+		go calculateSum(&Context{data, lowerBound, upperBound}, resultsChannel)
 	}
 
 	var sum int
 
 	for i := 0; i < cpuCount; i++ {
-		var x int = <-partialSum
+		var partialSum = <-resultsChannel
 
-		fmt.Println("Partial data received:", x)
+		fmt.Println("Partial sum received:", partialSum)
 
-		sum += x
+		sum += partialSum
 	}
 
-	close(partialSum)
+	// Using range to continuously fetch response from the channel.
+	// Note: we need to close() somewhere before or within worker context
+	// to properly stop this loop.
+	//
+	// for partialSum := range resultsChannel {
+	// 	//...
+	// }
+
+	close(resultsChannel)
 
 	fmt.Println("Sum:", sum)
 }
