@@ -38,7 +38,7 @@ func rot13(char byte) byte {
 	case 'A' <= char && char <= 'Z':
 		rangeLowBound, rangeHighBound = 'A', 'Z'
 	default:
-		return b
+		return char
 	}
 
 	// x % y (modular) can be used as abstract solution
@@ -47,7 +47,7 @@ func rot13(char byte) byte {
 	// 12 % 10 == 2 - can be treated as "we broke upper bound and starting again from zero"
 	// if our low bound starts with >0 value, we need to adjust it temporarily
 	// to 0 while calculation and apply it right after
-	return (b-rangeLowBound+13)%(rangeHighBound-rangeLowBound+1) + rangeLowBound
+	return (char-rangeLowBound+13)%(rangeHighBound-rangeLowBound+1) + rangeLowBound
 }
 
 func (r *rot13Reader) Read(outputBuffer []byte) (bytesRead int, err error) {

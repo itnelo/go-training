@@ -1,7 +1,7 @@
 package advanced
 
 import (
-	_ "fmt"
+	"fmt"
 )
 
 func Run() {
@@ -13,4 +13,8 @@ func Run() {
 
 	//fmt.Println("\n\nSymbol relocation...")
 	//symbolRelocation()
+
+	fmt.Println("\n\nGoroutines and channels...")
+	goroutines()
+	channels()
 }

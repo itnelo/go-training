@@ -7,5 +7,5 @@ func Run() {
 	//fibonacciClosure()
 	//светКамераМотор()
 	//ipaddrStringer()
-	streamReader()
+	//streamReader()
 }
