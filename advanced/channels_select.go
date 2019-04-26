@@ -8,6 +8,8 @@ import (
 
 // select blocks until one of its cases can run
 
+// chooses one at random if multiple cases are ready
+
 // select case can be:
 // - assign (case var := <-channelName)
 // - receiver (case <-channelName)
@@ -23,12 +25,14 @@ func textVomiter(
 	var counter int = 1
 forLable:
 	for {
+		// first and second cases will be executed randomly
 		select {
 		case textChannel <- func() []byte {
-			return []byte("test" + strconv.Itoa(counter))
+			return []byte("testFromCase1_" + strconv.Itoa(counter))
 		}():
-			//_ = true
 			counter++
+		case textChannel <- func() []byte { return []byte("testFromCase2") }():
+			_ = true
 		case <-quitChannel:
 			fmt.Println("So Long, Suckers!")
 
@@ -65,3 +69,15 @@ func channelSelect() {
 	// main goroutine waits when both sender and receiver completes their jobs.
 	waitGroup.Wait()
 }
+
+// testFromCase1_1
+// testFromCase2
+// testFromCase2
+// testFromCase2
+// testFromCase1_2
+// testFromCase2
+// testFromCase1_3
+// testFromCase2
+// testFromCase2
+// testFromCase1_4
+// So Long, Suckers!
