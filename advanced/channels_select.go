@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 	"sync"
+	"time"
 )
 
 // select blocks until one of its cases can run
@@ -37,12 +38,17 @@ forLable:
 			fmt.Println("So Long, Suckers!")
 
 			break forLable
+		default:
+			fmt.Println("Non-blocking operation...")
+			time.Sleep(50 * time.Millisecond)
 		}
 	}
 
 	waitGroup.Done()
 }
 
+// send-only channel typehint: chan<- Type
+// receive-only channel typehint: <-chan Type
 func channelSelect() {
 	textChannel := make(chan []byte, 4)
 	quitChannel := make(chan bool)

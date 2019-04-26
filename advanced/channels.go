@@ -17,6 +17,7 @@ import (
 // - communicate less, do more
 // - only sender closes the channel
 // - closing a channel is optionally, only if an explicit "no more values" flag is needed
+// - use send-only (chan<- Type) and receive-only (<-chan Type) typehints for additional type-safety
 
 // messaging between goroutines is pricey, especially if they executed by
 // different OS threads
@@ -70,6 +71,7 @@ func channels() {
 	var batchSize int = DataAmount / cpuCount
 
 	// unbuffered channel
+	// sends only if at least one receiver is awaits
 	// var results = make(chan int)
 
 	// Channel with buffer capacity
