@@ -41,12 +41,12 @@ func rot13(char byte) byte {
 		return char
 	}
 
-	// x % y (modular) can be used as abstract solution
-	// it determines how x is fits in [0, y] cyclic range
+	// x % y (modular) can be used as an abstract solution
+	// it determines how x fits in [0, y] cyclic range
 	// for example, 5 % 10 == 5, 5 is exists in range
 	// 12 % 10 == 2 - can be treated as "we broke upper bound and starting again from zero"
 	// if our low bound starts with >0 value, we need to adjust it temporarily
-	// to 0 while calculation and apply it right after
+	// to 0 while calculating and applying it right after
 	return (char-rangeLowBound+13)%(rangeHighBound-rangeLowBound+1) + rangeLowBound
 }
 

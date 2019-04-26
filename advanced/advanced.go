@@ -15,6 +15,7 @@ func Run() {
 	//symbolRelocation()
 
 	fmt.Println("\n\nGoroutines and channels...")
-	goroutines()
-	channels()
+	//goroutines()
+	//channels()
+	channelSelect()
 }

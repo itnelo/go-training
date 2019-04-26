@@ -11,6 +11,7 @@ import (
 // By default <- blocks until sender becomes ready
 
 // <- channel operator for receiving data
+// nil channel causes a deadlock error
 
 // conventions:
 // - communicate less, do more

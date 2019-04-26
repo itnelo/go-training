@@ -45,6 +45,8 @@ func dynamicSwitchExpression() bool {
 	return true
 }
 
+// Note: "fallthrough" is not permitted in a type switch
+// case [statement1], [statement2]: - is also works (stops at first positive check)
 func switching() {
 	fmt.Print("Go runs on ")
 
