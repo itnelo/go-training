@@ -6,6 +6,9 @@ import (
 	"reflect"
 )
 
+// we can take address to slice element
+// after grown pointer remains valid
+
 // variadic
 func sum(numbers ...int) (sum int) {
 	defer func() {

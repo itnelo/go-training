@@ -11,7 +11,9 @@ import (
 // By default <- blocks until sender becomes ready
 
 // <- channel operator for receiving data
-// nil channel causes a deadlock error
+// deadlock:
+// - nil channel
+// - no reader/writer
 
 // conventions:
 // - communicate less, do more
@@ -81,6 +83,7 @@ func channels() {
 	// from one of the goroutines, and once that is done,
 	// it will write new values to the channel.
 	var resultsChannel chan int = make(chan int, cpuCount)
+	defer close(resultsChannel)
 
 	for i := 0; i < cpuCount; i++ {
 		var lowerBound, upperBound int = i * batchSize, (i + 1) * batchSize
@@ -93,9 +96,9 @@ func channels() {
 	for i := 0; i < cpuCount; i++ {
 		// Blocks execution of main goroutine if channel is empty
 		// (value, ok), where ok indicates that channel is not closed yet
-		partialSum, isMoreValues := <-resultsChannel
+		partialSum, isChannelStillOpen := <-resultsChannel
 
-		if !isMoreValues {
+		if !isChannelStillOpen {
 			break
 		}
 
@@ -111,8 +114,6 @@ func channels() {
 	// for partialSum := range resultsChannel {
 	// 	//...
 	// }
-
-	close(resultsChannel)
 
 	fmt.Println("Sum:", sum)
 }

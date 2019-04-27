@@ -76,14 +76,16 @@ func channelSelect() {
 	waitGroup.Wait()
 }
 
+// Non-blocking operation...
+// testFromCase2
+// testFromCase2
 // testFromCase1_1
-// testFromCase2
-// testFromCase2
-// testFromCase2
 // testFromCase1_2
 // testFromCase2
+// Non-blocking operation...
 // testFromCase1_3
 // testFromCase2
-// testFromCase2
 // testFromCase1_4
+// testFromCase2
+// testFromCase1_5
 // So Long, Suckers!

@@ -4,6 +4,14 @@ import (
 	"fmt"
 )
 
+// maps are references to runtime type
+
+// we cannot take pointer directly to map element
+// because
+// 1) map moves element to another memory addr while grown,
+// so it can lead to dangling pointer (restricted by Go design)
+// 2) map is not a slice (doesn't have an underlying array)
+
 type Cat struct {
 	age int
 }
