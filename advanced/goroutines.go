@@ -22,6 +22,8 @@ import (
 
 // GOMAXPROCS is used for parallel execution (1 means it will be concurrent execution only).
 
+// https://divan.dev/posts/go_concurrency_visualize
+
 func say(s string) {
 	for i := 0; i < 5; i++ {
 		time.Sleep(200 * time.Millisecond)
