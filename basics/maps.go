@@ -10,7 +10,9 @@ import (
 // because
 // 1) map moves element to another memory addr while grown,
 // so it can lead to dangling pointer (restricted by Go design)
-// 2) map is not a slice (doesn't have an underlying array)
+// map is not a slice (doesn't have an underlying array)
+
+// 1.11: map can't be read-only, need to be careful while passing.
 
 type Cat struct {
 	age int
@@ -23,6 +25,11 @@ func (c Cat) Meow() {
 var (
 	cats map[string]Cat
 )
+
+// data will be changed because values are stored in heap.
+func changeMap(m map[string]Cat) {
+	m["Bob"] = Cat{age: 8}
+}
 
 func maps() {
 	cats = make(map[string]Cat)
@@ -63,4 +70,8 @@ func maps() {
 	delete(cats, "Bill")
 	cat, isBillExists := cats["Bill"]
 	fmt.Println("Is Bill exists:", isBillExists, cat)
+
+	// changing within a function
+	changeMap(cats)
+	fmt.Println(cats)
 }

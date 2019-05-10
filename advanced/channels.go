@@ -21,6 +21,10 @@ import (
 // - closing a channel is optionally, only if an explicit "no more values" flag is needed
 // - use send-only (chan<- Type) and receive-only (<-chan Type) typehints for additional type-safety
 
+// We can organize receive op for a channel within local scope
+// but restrict consumer that gets this channel by func retval
+// to only sending op (see ticker_and_timer.go example)
+
 // messaging between goroutines is pricey, especially if they executed by
 // different OS threads
 

@@ -8,6 +8,6 @@ func Run() {
 	//светКамераМотор()
 	//ipaddrStringer()
 	//streamReader()
-	equivalentBinaryTrees()
-	pingPong()
+	//equivalentBinaryTrees()
+	//pingPong()
 }

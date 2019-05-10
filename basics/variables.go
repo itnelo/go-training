@@ -62,6 +62,14 @@ func Variables() {
 	var foo, bar = true, "string"
 	fmt.Println(foo, bar)
 
+	// multiple variables declaration within func scope is still a block.
+	var (
+		code        int
+		description string
+	)
+
+	_, _ = code, description
+
 	k := 5
 	fmt.Println(k)
 

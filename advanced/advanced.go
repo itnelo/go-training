@@ -18,4 +18,5 @@ func Run() {
 	//goroutines()
 	//channels()
 	//channelSelect()
+	tickerAndTimer()
 }
