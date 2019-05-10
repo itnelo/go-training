@@ -8,6 +8,11 @@ import (
 // time.Timer is a single-time trigger
 // time.Ticker is a repetitive trigger
 
+// use-cases comparison against time.Sleep:
+// - can be stopped
+// - can be used as a "bursty rate limiter" if have a buffer
+//     (see https://gobyexample.com/rate-limiting)
+
 // Some kind of data for state monitoring.
 type Resource struct {
 	name string
