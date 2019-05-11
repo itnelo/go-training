@@ -1,5 +1,9 @@
 package exercises
 
+import (
+	"github.com/itnelo/go-training/exercises/web"
+)
+
 func Run() {
 	//evalSquareRootBaseFunctions()
 	//showPic()
@@ -10,4 +14,6 @@ func Run() {
 	//streamReader()
 	//equivalentBinaryTrees()
 	//pingPong()
+
+	web.CallClient()
 }

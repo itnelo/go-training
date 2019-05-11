@@ -19,5 +19,7 @@ func Run() {
 	//channels()
 	//channelSelect()
 	//tickerAndTimer()
-	atomicIncrement()
+
+	//fmt.Println("\n\nAtomic...")
+	//atomicIncrement()
 }
