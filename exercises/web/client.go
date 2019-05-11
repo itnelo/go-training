@@ -25,10 +25,10 @@ func CallClient() {
 
 	var stringBuilder = &strings.Builder{}
 
-	// ioutil.ReadAll is potential unsafe for big data
+	// ioutil.ReadAll is potentially unsafe for big data
 	_, copyErr := io.Copy(stringBuilder, response.Body)
 	if nil != copyErr {
-		fmt.Println("Failed to read response body.", copyErr)
+		fmt.Println("Failed to read response body as a string.", copyErr)
 		os.Exit(2)
 	}
 

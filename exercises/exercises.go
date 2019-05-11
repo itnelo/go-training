@@ -15,5 +15,6 @@ func Run() {
 	//equivalentBinaryTrees()
 	//pingPong()
 
-	web.CallClient()
+	//web.CallClient()
+	web.HttpServerStart()
 }
