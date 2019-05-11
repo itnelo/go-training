@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"strconv"
 )
 
@@ -24,9 +23,12 @@ func rootHandler(responseWriter http.ResponseWriter, request *http.Request) {
 	log.Println("HTTP request received.", request)
 
 	_, err := fmt.Fprintln(responseWriter, "This is a response from a webserver.")
+
 	if nil != err {
-		log.Fatal(err)
-		os.Exit(1)
+		log.Println("An error has been occurred during writing a response.", err)
+
+		var errorCode = http.StatusInternalServerError
+		http.Error(responseWriter, http.StatusText(errorCode), errorCode)
 	}
 }
 
@@ -39,7 +41,6 @@ func HttpServerStart() {
 
 	// Serving request via default router http.ServeMux.
 	var addr = ":" + strconv.Itoa(*ServerPort)
-	if err := http.ListenAndServe(addr, nil); nil != err {
-		log.Fatal(err)
-	}
+	err := http.ListenAndServe(addr, nil)
+	log.Fatal(err)
 }
