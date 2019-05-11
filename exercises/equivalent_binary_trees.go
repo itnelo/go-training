@@ -12,6 +12,10 @@ var (
 	lock = sync.RWMutex{}
 )
 
+// channel can be used as an alternative to mutex
+// ch <- true
+// *work*
+// <- ch
 func concurrentMapWrite(m map[int]int, key, delta int) {
 	lock.Lock()
 	defer lock.Unlock()

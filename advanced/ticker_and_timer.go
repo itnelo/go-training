@@ -57,7 +57,9 @@ func stateMonitorInit(updateInterval time.Duration) chan<- *Resource {
 
 				fmt.Println("Resource received for analysis:", resource)
 
-				stateMap[resource.name] = analyseResource(resource)
+				if state, err := analyseResource(resource); nil == err {
+					stateMap[resource.name] = *state
+				}
 			}
 		}
 
@@ -69,17 +71,21 @@ func stateMonitorInit(updateInterval time.Duration) chan<- *Resource {
 	return analyseChannel
 }
 
-func analyseResource(resource *Resource) State {
+func analyseResource(resource *Resource) (*State, error) {
+	if nil == resource {
+		return nil, fmt.Errorf("nil pointer.")
+	}
+
 	var code, description = 500, "FAIL"
 
 	if resource.data > 0 {
 		code, description = 200, "OK"
 	}
 
-	return State{
+	return &State{
 		code:        code,
 		description: description,
-	}
+	}, nil
 }
 
 func tickerAndTimer() {

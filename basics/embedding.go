@@ -44,8 +44,9 @@ type Мурзебобик struct {
 	// direct embedding
 	// we don't need to explicitly write boilerplate code for methods forwarding
 	// we can target a specific struct within methods by similar field names
-	Мурзик       // *Мурзик requires initialization
-	dog    Бобик // field name requires explicit forwarding method, *Бобик requires initialization
+	Мурзик // *Мурзик requires initialization
+	// slice cannot be embedded anonymously
+	dog Бобик // field name requires explicit forwarding method, *Бобик requires initialization
 	// forwarding methods is provided implicitly
 	// the receiver will be a concrete inner struct: Мурзик or Бобик, not Мурзебобик itself
 }

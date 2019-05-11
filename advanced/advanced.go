@@ -18,5 +18,6 @@ func Run() {
 	//goroutines()
 	//channels()
 	//channelSelect()
-	tickerAndTimer()
+	//tickerAndTimer()
+	atomicIncrement()
 }

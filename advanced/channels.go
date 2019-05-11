@@ -25,6 +25,13 @@ import (
 // but restrict consumer that gets this channel by func retval
 // to only sending op (see ticker_and_timer.go example)
 
+// channel can be used as an alternative mutex:
+// ch <- true
+// *some work meant to be atomic*
+// <- ch
+// but it breaks a base logic (mutex for critical section access,
+// channels - for communication between goroutines)
+
 // messaging between goroutines is pricey, especially if they executed by
 // different OS threads
 
