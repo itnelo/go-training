@@ -6,4 +6,7 @@ services:
             context: .
             args:
                 GOLANG_VERSION: ${GOLANG_VERSION}
-                APP_DEPLOYMENT_PATH: ${APP_DEPLOYMENT_PATH}
+                DEPLOYMENT_PATH: ${DEPLOYMENT_PATH}
+                TIMEZONE: ${TIMEZONE}
+        ports:
+            - "${APP_PORT_EXPOSE}:9696"

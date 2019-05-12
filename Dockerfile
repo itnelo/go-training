@@ -2,15 +2,22 @@ ARG GOLANG_VERSION
 
 FROM golang:${GOLANG_VERSION}
 
-ARG APP_DEPLOYMENT_PATH
+ARG DEPLOYMENT_PATH
+ARG TIMEZONE
 
-WORKDIR ${APP_DEPLOYMENT_PATH}
+WORKDIR ${DEPLOYMENT_PATH}
 
 COPY . .
+
+# timezone
+RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone && \
+    date
 
 RUN go get -d -v
 RUN go mod verify
 RUN go mod vendor -v
-RUN go install -mod vendor -v
+RUN go build -mod vendor -o /usr/local/bin/app -v
 
-CMD ["go-training"]
+USER www-data
+
+CMD ["app", "-port", "9696"]

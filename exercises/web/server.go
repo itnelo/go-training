@@ -1,6 +1,7 @@
 package web
 
 import (
+	_ "context"
 	"flag"
 	"fmt"
 	"log"
@@ -18,7 +19,6 @@ func init() {
 	flag.Parse()
 }
 
-// context
 func rootHandler(responseWriter http.ResponseWriter, request *http.Request) {
 	log.Println("HTTP request received.", request)
 
