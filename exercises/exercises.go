@@ -1,7 +1,7 @@
 package exercises
 
 import (
-	"github.com/itnelo/go-training/exercises/web"
+	_ "github.com/itnelo/go-training/exercises/web"
 )
 
 func Run() {
@@ -16,5 +16,5 @@ func Run() {
 	//pingPong()
 
 	//web.CallClient()
-	web.HttpServerStart()
+	//web.HttpServerStart()
 }

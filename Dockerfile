@@ -20,4 +20,4 @@ RUN go build -mod vendor -o /usr/local/bin/app -v
 
 USER www-data
 
-CMD ["app", "-port", "9696"]
+ENTRYPOINT ["app", "-port", "9696"]
