@@ -11,6 +11,9 @@ type Point2D struct {
 
 // Go: pass by value forever
 
+// Aggregated non-pointer types have a zero value after parent's instantiation.
+// https://play.golang.org/p/Qi6whXjX2JR
+
 func localStructCopy(p Point2D) {
 	p.X = 7
 }
