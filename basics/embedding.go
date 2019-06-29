@@ -5,6 +5,7 @@ import (
 )
 
 // visibility is on a per package only
+// methods can be overrided
 
 // https://golang.org/doc/effective_go.html#embedding
 

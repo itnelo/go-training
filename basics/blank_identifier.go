@@ -8,6 +8,9 @@ import (
 	_ "net/http/pprof"
 )
 
+// conventions:
+// - blank import only in main/tests
+
 type Array5 [5]int
 
 func blankIdentifier() {

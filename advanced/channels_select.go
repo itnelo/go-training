@@ -18,6 +18,8 @@ import (
 
 // fallthrough is not available for select case
 
+// you can dynamically add select cases with reflect.SelectCase
+
 func textVomiter(
 	textChannel chan []byte,
 	quitChannel chan bool,

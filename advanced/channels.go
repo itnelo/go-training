@@ -35,6 +35,8 @@ import (
 // messaging between goroutines is pricey, especially if they executed by
 // different OS threads
 
+// fastest solution for merging channel - recursion (rec call in default)
+
 const (
 	DataAmount int = 1 << 15
 )
