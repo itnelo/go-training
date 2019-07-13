@@ -4,7 +4,8 @@ import (
 	"github.com/itnelo/go-training/advanced"
 	"github.com/itnelo/go-training/basics"
 	"github.com/itnelo/go-training/exercises"
-	"github.com/symfony-doge/event/example"
+	_ "github.com/symfony-doge/event/example"
+	example "github.com/symfony-doge/splitex/example"
 )
 
 func main() {
@@ -13,5 +14,8 @@ func main() {
 	exercises.Run()
 
 	// github.com/symfony-doge/event/example
-	example.OneSubscriberManyPublishers()
+	// example.OneSubscriberManyPublishers()
+
+	// github.com/symfony-doge/splitex/example
+	example.ConcurrentSliceSum()
 }
