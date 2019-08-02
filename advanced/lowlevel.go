@@ -6,15 +6,19 @@ import (
 	"unsafe"
 )
 
+// struct alignment: 8
+
+// https://go101.org/article/memory-layout.html
+
 var (
 	User struct {
-		//bt byte         // 8 bytes?
-		//i32  int32  // 8 bytes
+		//bt byte         // 1 byte
+		//i32  int32  // 4 bytes + padding 3 bytes
 		i64 int64 // 8 bytes
 		//ui64 uint64 // 8 bytes
-		b bool   // 8 bytes (int64)
-		s string // 16 bytes, so eq. to x2 int64
-		//fl32    float32    // 8 bytes
+		b bool   // 1 byte + padding 7 bytes
+		s string // 16 bytes
+		//fl32    float32    // 4 bytes + padding 4 bytes
 		//fl64    float64    // 8 bytes
 		//cmx64   complex64  // 8 bytes
 		//cmx128  complex128 // 16 bytes
